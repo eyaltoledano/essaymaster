@@ -4,6 +4,10 @@ description: Start a paper — plan doc first, then scaffold paper/ and draft
 
 Invoke the `essaymaster` skill in **init** mode for: $ARGUMENTS
 
+If the repo already has a standalone `paper/` and this is a second paper, FIRST run
+the migration protocol (`references/maintenance.md` §Multi-paper): `git mv paper
+papers/<slug>`, fix path references, verify the migrated build, commit — then proceed.
+
 Order is mandatory: (1) write the plan doc per `references/planning.md` (verified
 related-work survey, genre template, outline, claims→evidence table, figure list) and
 commit it; (2) scaffold the paper directory from `${CLAUDE_PLUGIN_ROOT}/templates/paper/`;

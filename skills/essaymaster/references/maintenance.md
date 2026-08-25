@@ -72,3 +72,24 @@ there is no paper or no drift, so it is safe as a SessionStart hook.
 Use `papers/<slug>/` each with its own `SYNC.json` and disjoint-ish `watchedPaths`.
 Drift script iterates over all of them. A repo-level `papers/README.md` lists papers +
 status (draft / preprint vN / submitted / published) + one-line claim each.
+
+### Migrating a standalone `paper/` when the second paper arrives
+
+Init performs this automatically (do not ask — it is mechanical and history-preserving):
+
+1. Pick a slug for the existing paper from its title (short-kebab).
+2. `git mv paper papers/<slug>` — a pure rename, history follows.
+3. Fix path references to the old location: repo docs/READMEs, CI workflows,
+   scripts that call `paper/build.sh` or `make -C paper`, and any `../..`-relative
+   paths inside the paper's own `consolidate.mjs`/`make-figures.mjs` that reach into
+   repo corpora (the extra directory level changes them — check every
+   `join(paperRoot, "..")`-style path). Grep the repo for `paper/` and `-C paper`.
+4. Run the migrated paper's `build.sh` — the migration isn't done until it builds.
+5. Create `papers/README.md` listing both papers (status + one-line claim each).
+6. Commit the migration alone (`paper: migrate paper/ -> papers/<slug>/ for
+   multi-paper layout`), THEN scaffold the new paper in `papers/<new-slug>/` as a
+   separate commit.
+
+`watchedPaths` in the migrated `SYNC.json` need no change (they point at repo paths,
+not the paper's own location), but `lastSyncedCommit` stays as-is — the migration
+commit itself is not paper-content drift.

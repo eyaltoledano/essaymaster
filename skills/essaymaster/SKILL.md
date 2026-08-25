@@ -20,7 +20,10 @@ having to remember anything.
 ## The model
 
 A paper under essaymaster is a directory (conventionally `paper/`, or `papers/<slug>/`
-for multi-paper repos) with this contract:
+for multi-paper repos) with this contract. **When a second paper is added to a repo
+that has a standalone `paper/`, init MUST first migrate it to `papers/<slug>/`**
+(protocol in `references/maintenance.md` §Multi-paper) — the tooling follows
+`SYNC.json` locations either way, but the layout stays uniform.
 
 ```
 paper/
