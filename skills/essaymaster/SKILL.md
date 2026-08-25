@@ -56,6 +56,7 @@ repo that already has a paper, `mine` for one that doesn't.
 | Mode | When | Reference |
 |---|---|---|
 | **mine** | "what papers could come out of this repo?" — explore, extract candidates, score, propose | `references/mining.md` |
+| **mine-sessions** | mine the agent's own session transcripts for what git can't show: measured dead ends, diagnosis arcs, surprises, emergent methodology | `references/session-mining.md` |
 | **init** | a candidate is agreed — write the plan doc, then scaffold `paper/` from `templates/paper/` and draft | `references/planning.md`, `references/writing.md` |
 | **sync** | maintenance: fold landed work into the paper (the recurring mode) | `references/maintenance.md` |
 | **build** | compile: check/install toolchain, run `paper/build.sh` | `references/toolchain.md` |
@@ -82,8 +83,15 @@ This is what makes papers maintain themselves. Full protocol in
 5. Commit per landed theme with the `paper:` / `docs(paper):` prefix — one commit per
    coherent change, message states what landed and what the paper now claims.
 
-`scripts/paper-drift.sh` (also wired as a SessionStart hook when installed as a plugin)
-prints how far the paper has drifted; when it reports drift, offer to sync.
+Two mechanical signals feed this mode. `scripts/paper-drift.sh` (also wired as a
+SessionStart hook when installed as a plugin) prints how far the paper has drifted at
+session start; when it reports drift, offer to sync. And the **capture hook**
+(`scripts/install-git-hook.sh`, a git post-commit hook installed at init) prints a
+one-line nudge in the commit output itself whenever a landed commit touches watched
+paths without touching the paper — so the "does the paper need this?" question is
+raised at the moment work lands, for agents and humans alike. When you see its nudge
+in a commit result, classify the commit then and there (often "irrelevant", sometimes
+a sync).
 
 ## Mode: mine (one-shot extraction from a repo)
 

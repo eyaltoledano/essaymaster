@@ -28,14 +28,21 @@ rebuild it with `cd paper && ./build.sh`.
   optimization campaigns with recorded numbers, non-obvious theses in design docs,
   things you hand-built because nothing off-the-shelf fit. Ranked candidates with an
   honest evidence inventory; you pick.
+- **Mine sessions** — `/paper-mine-sessions` sweeps the agent's own session
+  transcripts for the material git structurally cannot show: measured dead ends that
+  never got committed, multi-step diagnosis arcs, surprise results, and recurring
+  patterns across sessions that add up to a thesis. Session-exclusive finds only;
+  transcript numbers are treated as lab-notebook leads, never measurements of record.
 - **Init** — plan doc first (verified related-work survey, claims → required-evidence
   table, figure list), then a scaffolded `paper/` with a one-command
   data → figures → PDF build (tectonic/latexmk autodetect, zero-dependency figure
   generators).
 - **Sync** — the maintenance loop. `SYNC.json` tracks the last commit the paper
   absorbed and which paths it watches; a SessionStart hook prints drift ("paper is 14
-  watched commits behind"); `/paper-sync` classifies landed work and folds it in
-  through the provenance pipeline. Nobody has to remember the paper exists.
+  watched commits behind"); a git post-commit **capture hook** nudges in the commit
+  output itself the moment landed work touches watched paths; `/paper-sync`
+  classifies landed work and folds it in through the provenance pipeline. Nobody has
+  to remember the paper exists.
 - **Review / Publish** — adversarial review with numbered findings (overclaim hunt,
   number reconciliation, citation audit), then a verified arXiv bundle.
 
@@ -51,8 +58,8 @@ Also works as a Claude Code plugin (from a marketplace that includes this repo:
 `/plugin install essaymaster`), or with no install at all: mention "essaymaster" /
 point Claude at `skills/essaymaster/SKILL.md` in this checkout.
 
-Commands: `/paper-mine` `/paper-init` `/paper-sync` `/paper-build` `/paper-review`
-`/paper-publish`.
+Commands: `/paper-mine` `/paper-mine-sessions` `/paper-init` `/paper-sync`
+`/paper-build` `/paper-review` `/paper-publish`.
 
 ## The two invariants
 
@@ -65,12 +72,14 @@ Commands: `/paper-mine` `/paper-init` `/paper-sync` `/paper-build` `/paper-revie
 ## Layout
 
 ```
-skills/essaymaster/      SKILL.md + references/ (mining, planning, provenance,
-                         citations, writing, maintenance, toolchain, figures)
+skills/essaymaster/      SKILL.md + references/ (mining, session-mining, planning,
+                         provenance, citations, writing, maintenance, toolchain, figures)
 commands/                /paper-* slash commands
-agents/                  paper-miner (parallel repo scout), paper-reviewer (adversarial)
+agents/                  paper-miner (repo scout), session-miner (transcript scout),
+                         paper-reviewer (adversarial)
 hooks/hooks.json         SessionStart drift report (silent when no paper / no drift)
-scripts/                 check-toolchain.sh, paper-drift.sh
+scripts/                 check-toolchain.sh, paper-drift.sh, paper-post-commit.sh +
+                         install-git-hook.sh (the commit-time capture hook)
 templates/paper/         the scaffold: build.sh, Makefile, arxiv.sty, paper.tex
                          skeleton, refs.bib, data/results/figures pipeline, SYNC.json
 ```
