@@ -36,6 +36,12 @@ network** (tectonic's first-run package fetch excepted), deterministic:
 `make -C paper` mirrors the same steps with `data / figures / pdf / clean / arxiv`
 targets.
 
+The CLI wraps verification around this vendored build (it never replaces it):
+`essaymaster check` is the pre-commit and CI gate (wire `node
+<pkg>/bin/essaymaster.mjs check` into CI so the paper has tests), and
+`essaymaster bundle` builds with a `.bbl`-producing engine, assembles
+`arxiv-bundle/`, and verifies its contents — prefer it over raw `make arxiv`.
+
 ## Markdown-source variant
 
 If the team prefers Markdown as the editable source: pandoc with `--natbib` (NOT the

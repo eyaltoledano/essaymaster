@@ -72,6 +72,15 @@ ledger it must be either (a) re-run cleanly, or (b) ledgered with explicit
 transcript provenance AND flagged in the paper as an uncontrolled observation.
 Invariant 1 applies with no session-mining exception.
 
+## Disclosure rule
+
+Transcripts freely mix public and proprietary work. Every find inherits a
+`Disclosure` rating (see `mining.md`) from the repo/product it concerns; a find
+spanning private work is `internal-only` by default and anything ambiguous is
+`needs-clearance`. Cross-project sweeps (`all` scope) must rate per-find, not
+per-sweep. Nothing rated below `public` enters a publishable paper without the
+owner's explicit decision.
+
 ## Privacy rule
 
 Transcripts can contain secrets, tokens, personal data, and unrelated work. Miners

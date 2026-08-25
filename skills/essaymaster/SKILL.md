@@ -67,6 +67,29 @@ Read the mode's reference file BEFORE acting — each contains the distilled dis
 (from the Gerbil paper practice, ~40 maintenance commits over 2 months) that makes the
 output review-grade instead of blog-grade.
 
+## The CLI (always present — no fallback path)
+
+Every mechanical step goes through the bundled CLI, which ships in this package at
+`bin/essaymaster.mjs` (from a plugin install: `node
+"${CLAUDE_PLUGIN_ROOT}/bin/essaymaster.mjs" <verb>`). It is versioned with the skill
+and therefore always present wherever the skill runs — never probe for it, never
+hand-roll its verbs, never write a "if the CLI is missing" branch:
+
+| Verb | Does |
+|---|---|
+| `drift [--json]` | how far each paper lags HEAD (same logic as the hooks) |
+| `init [--dir D]` | scaffold + sync pointer + capture-hook install |
+| `migrate <slug>` | `paper/` → `papers/<slug>/` (then finish the judgment steps it prints) |
+| `check [--json]` | lint the invariants: provenance coverage, cite keys, figure files, TODO surfacing, staleness — run before every paper commit; CI-able |
+| `sync-done [--commit sha]` | advance the sync pointer (refuses if the tex is newer than the PDF) |
+| `bundle` | build + assemble + verify the arXiv bundle (includes the disclosure gate) |
+| `hooks install` | (re)install the git capture hook |
+
+Judgment is never delegated to the CLI: classifying commits, deciding contributions,
+wording claims, mining, and review remain agent work per the references. If a repo is
+too unusual for a verb (exotic layout), fix the repo or extend the CLI — do not
+silently reimplement the verb inline.
+
 ## Mode: sync (the heart of maintenance)
 
 This is what makes papers maintain themselves. Full protocol in
@@ -115,6 +138,15 @@ list with per-item data status (✅ have / ⚠️ needs sweep / 🆕 new asset).
 recorded sources, and draft section-by-section per `references/writing.md`.
 
 ## Rules that always apply
+
+- **Not all work becomes a paper, and not every paper becomes public.** Every mined
+  candidate carries a `Disclosure` rating: `public` (from public repos/results),
+  `needs-clearance` (mixed provenance), or `internal-only` (proprietary methods,
+  unreleased products, competitive data). Internal-only material never enters a
+  publishable paper without the owner's explicit decision — but an *internal
+  whitepaper in a private repo* is a first-class essaymaster target; publication is
+  a separate, gated step (`bundle` prompts the gate). Session transcripts default to
+  the rating of the repo they concern; anything ambiguous is `needs-clearance`.
 
 - **Citations**: verify every id by web search before writing it into `refs.bib`; many
   major systems (llama.cpp, MLX, transformers.js…) have NO paper — cite the repo, never

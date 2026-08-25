@@ -51,11 +51,13 @@ there is no paper or no drift, so it is safe as a SessionStart hook.
    - **Irrelevant** — most commits. Skip.
 3. **Apply** — data first (`measurements.json` → run `consolidate.mjs` →
    `make-figures.mjs`), then tex. Numbers change through the pipeline, never inline.
-4. **Rebuild** — `paper/build.sh`; open `figures/index.html` mentally (or actually)
-   against the changed series; scan the PDF page count and any new overfull warnings.
-5. **Record** — update `SYNC.json` (`lastSyncedCommit` → current HEAD, adjust
-   `pendingTodos`), commit per `writing.md` conventions: one commit per coherent theme,
-   `paper:` prefix, message = what landed → what the paper now says.
+4. **Rebuild and gate** — `paper/build.sh`, then `essaymaster check` (must pass);
+   eyeball `figures/index.html` against the changed series; scan the PDF page count
+   and any new overfull warnings.
+5. **Record** — `essaymaster sync-done` (advances `lastSyncedCommit`; refuses if the
+   tex outran the PDF), adjust `pendingTodos`, commit per `writing.md` conventions:
+   one commit per coherent theme, `paper:` prefix, message = what landed → what the
+   paper now says.
 
 ## Cadence patterns
 
@@ -78,7 +80,8 @@ status (draft / preprint vN / submitted / published) + one-line claim each.
 Init performs this automatically (do not ask — it is mechanical and history-preserving):
 
 1. Pick a slug for the existing paper from its title (short-kebab).
-2. `git mv paper papers/<slug>` — a pure rename, history follows.
+2. `essaymaster migrate <slug>` — does the tracked `git mv` and prints the remaining
+   judgment steps; history follows.
 3. Fix path references to the old location: repo docs/READMEs, CI workflows,
    scripts that call `paper/build.sh` or `make -C paper`, and any `../..`-relative
    paths inside the paper's own `consolidate.mjs`/`make-figures.mjs` that reach into

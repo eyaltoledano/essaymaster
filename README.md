@@ -61,6 +61,36 @@ point Claude at `skills/essaymaster/SKILL.md` in this checkout.
 Commands: `/paper-mine` `/paper-mine-sessions` `/paper-init` `/paper-sync`
 `/paper-build` `/paper-review` `/paper-publish`.
 
+## The CLI
+
+The mechanical spine ships as a zero-dependency CLI inside the package
+(`bin/essaymaster.mjs`), so it is always present wherever the skill runs — the skill
+routes every mechanical step through it, with no "if missing" fallback:
+
+```
+essaymaster drift        # how far each paper lags HEAD (--json for agents)
+essaymaster init         # scaffold + sync pointer + capture hook
+essaymaster migrate <s>  # paper/ -> papers/<slug>/, history-preserving
+essaymaster check        # lint the invariants — pre-commit and CI gate (exit 1 on fail)
+essaymaster sync-done    # advance the sync pointer (refuses if tex newer than PDF)
+essaymaster bundle       # build + assemble + verify the arXiv bundle
+essaymaster hooks install
+```
+
+Judgment (mining, classification, writing, review) stays with the agent; the CLI owns
+state transitions and verification. Papers still build standalone (`paper/build.sh`)
+— the CLI wraps checks around the vendored build, never replaces it. Wire
+`essaymaster check` into CI and the paper has tests.
+
+## Disclosure
+
+Not all work becomes a paper, and not every paper becomes public. Mined candidates
+carry a Disclosure rating (public / needs-clearance / internal-only); internal-only
+material never enters a publishable paper without the owner's explicit decision, and
+session-transcript finds inherit the rating of the work they concern. Internal
+whitepapers in private repos are a first-class target — publication is a separate
+step, gated in `/paper-publish` and `essaymaster bundle`.
+
 ## The two invariants
 
 1. **Provenance or TODO.** Every number in a paper traces to a row in
@@ -72,6 +102,7 @@ Commands: `/paper-mine` `/paper-mine-sessions` `/paper-init` `/paper-sync`
 ## Layout
 
 ```
+bin/essaymaster.mjs      the CLI (zero-dependency; state transitions + verification)
 skills/essaymaster/      SKILL.md + references/ (mining, session-mining, planning,
                          provenance, citations, writing, maintenance, toolchain, figures)
 commands/                /paper-* slash commands

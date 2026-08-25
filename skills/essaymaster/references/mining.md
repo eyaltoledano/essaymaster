@@ -39,6 +39,11 @@ For each candidate produce:
 **Effort.** T-shirt size for: missing measurements, writing, figures.
 **Risk.** What could kill it (a peer paper that already exists, a number that won't
   reproduce, a claim that's really configuration-dependent).
+**Disclosure.** public / needs-clearance / internal-only. Rate by the most
+  restrictive source the candidate draws on (private repos, unreleased products,
+  proprietary methods, competitive data => internal-only). Internal-only candidates
+  are still presented — as internal-whitepaper targets — but are never drafted for
+  publication without the owner's explicit decision.
 ```
 
 ## Ranking
