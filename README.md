@@ -2,10 +2,25 @@
 
 Write and maintain repo-resident research papers that grow with your codebase.
 
-Extracted from the practice that produced the Gerbil WebGPU paper: a ~27-page
+Extracted from the practice that produced the Gerbil WebGPU paper: a ~17-page
 arXiv-grade systems paper living in `paper/` of the engine repo, kept current across
-two months and ~40 maintenance commits as optimization campaigns landed — every number
+five months and 41 maintenance commits as optimization campaigns landed — every number
 provenance-tagged, every citation verified, rebuilt with one command.
+
+## The worked example: this repo's own paper
+
+This repository maintains its own paper with the tool it packages —
+[**"Essaymaster: Keeping a Research Paper Inside the Repository It
+Describes"**](paper/paper.pdf) — produced as the pipeline's first end-to-end run:
+a miner subagent extracted the case-study evidence from five months of the Gerbil
+paper's git history, seven citations were web-verified at authoring time, an
+adversarial review pass caught (among other things) the draft violating the tool's
+own Invariant 1, and the fixes are in the commit history with finding ids. Its
+source, provenance ledger, plan doc, and generated figures live in
+[`paper/`](paper/) and [`docs/research-paper-plan.md`](docs/research-paper-plan.md);
+rebuild it with `cd paper && ./build.sh`.
+
+[<img src="docs/assets/paper-page1.png" alt="First page of the essaymaster paper" width="640">](paper/paper.pdf)
 
 ## What it does
 
