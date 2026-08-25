@@ -101,9 +101,9 @@ one maintenance contract:
 \end{itemize}
 
 The discipline is executed primarily by a coding agent. Essaymaster packages it as an
-agent skill (a procedure document plus eight reference files encoding the rules
-above), together with scaffold templates, miner and reviewer subagents, and the
-drift hook, for the Claude Code harness~\citep{claudecode}. We view this packaging
+agent skill (a procedure document plus nine reference files encoding the rules
+above), together with scaffold templates, miner and reviewer subagents, and two
+drift-detection hooks, for the Claude Code harness~\citep{claudecode}. We view this packaging
 through the lens of agent--computer interfaces~\citep{yang2024sweagent}: just as
 agents resolve issues better when the repository is presented through an interface
 designed for them~\citep{jimenez2024swebench}, an agent maintains a paper reliably
@@ -146,7 +146,8 @@ scheduled.
 Third, \emph{the failure mode is silent}: nothing breaks when a paper claim goes
 stale. Code has tests; papers have only their authors' memory. The essaymaster
 position is that this third property is the one worth engineering away. Staleness
-must be made \emph{visible} (a drift count printed at session start) and falsehood
+must be made \emph{visible} (a drift count printed at session start, and a nudge in
+the commit output at the moment landed work touches watched paths) and falsehood
 made \emph{structurally difficult} (no unsourced number can enter the text
 unflagged).
 
@@ -193,7 +194,11 @@ recency.
 \label{sec:sync}
 \texttt{SYNC.json} records \texttt{lastSyncedCommit} and \texttt{watchedPaths}. Drift
 is \texttt{git log lastSyncedCommit..HEAD -- watchedPaths}, a number a hook can print
-in one line at session start. A sync is then a bounded editorial procedure: classify
+in one line at session start. A companion git post-commit hook closes the loop from
+the other side: when a landed commit touches watched paths without touching the
+paper, the committer (agent or human) is nudged in the commit output itself, so the
+``does the paper need this?'' question is raised at the moment of landing rather
+than at the next session. A sync is then a bounded editorial procedure: classify
 each watched commit (changed number, new evidence for an existing claim, narrative
 shift, retraction trigger, or irrelevant); apply changes \emph{through the data
 pipeline first}, then the prose; rebuild; advance the sync pointer; commit per theme
@@ -207,18 +212,23 @@ else, on the principle that a stale overclaim is worse than any gap.
 The discipline is executed by a coding agent, and the packaging reflects a specific
 belief: for editorial work, the right agent interface is \emph{prose contracts plus
 mechanical checks}, not end-to-end automation. The skill's procedure document routes
-among six modes (mine, init, sync, build, review, publish); eight reference files
-carry the rules of \S\ref{sec:design} in the imperative, checklist-bearing form
-agents follow reliably. The mechanical parts are plain scripts: drift counting,
+among seven modes (mine, mine-sessions, init, sync, build, review, publish); nine
+reference files carry the rules of \S\ref{sec:design} in the imperative,
+checklist-bearing form agents follow reliably. The mechanical parts are plain scripts: drift counting,
 toolchain probing, consolidation, figure generation, the build. An agent should never
 be trusted to \emph{compute} what a script can compute. The judgment parts remain
 agent work bounded by the invariants: classifying a landed commit, deciding whether a
 feature is a contribution, wording a qualifier.
 
-Two subagents matter. The \emph{miner} performs read-only archaeology: given a
-repository slice, it extracts candidate paper material (optimization campaigns
-with recorded numbers, non-obvious theses in design docs, negative results), each
-find paired with a web-verified novelty check. The \emph{reviewer} is adversarial
+The subagents divide by corpus. The \emph{miner} performs read-only archaeology over
+the repository: given a slice, it extracts candidate paper material (optimization
+campaigns with recorded numbers, non-obvious theses in design docs, negative
+results), each find paired with a web-verified novelty check. The
+\emph{session-miner} sweeps the agent's own session transcripts for the material git
+structurally cannot show: measured dead ends that never reached a commit, multi-step
+diagnosis arcs, and recurring cross-session patterns; its finds are treated as
+lab-notebook leads that must be re-run or explicitly flagged before entering a
+ledger, and only session-exclusive material survives the dedupe against git. The \emph{reviewer} is adversarial
 and edit-free: it returns numbered findings across four lenses (evidence, drift,
 citations, honesty), which are then fixed in commits referencing the finding ids, so
 the review trail is reconstructible from history alone (\S\ref{sec:casestudy}
