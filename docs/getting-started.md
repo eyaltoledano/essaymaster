@@ -59,6 +59,35 @@ absorbed and which paths it watches. Two signals keep it honest:
 - When a commit lands that touches watched paths, a note appears right in the commit
   output suggesting a sync.
 
+### Making it passive (one-time, mostly automatic)
+
+The paper writes itself passively only once both signals are armed. Here is what
+arms them:
+
+1. **The session-start signal** comes with the install. It runs in every repo and
+   stays silent unless a paper exists and has fallen behind, so there is nothing to
+   configure.
+2. **The commit-time signal** is a git hook. `/paper-init` installs it for you in
+   the repo where the paper was created. The one thing to know: **git hooks do not
+   travel with clones.** Each teammate (and each fresh clone or new machine) arms it
+   once with:
+
+   ```bash
+   node <package>/bin/essaymaster.mjs hooks install
+   ```
+
+   Run it from anywhere inside the repo; it is safe to re-run and never disturbs
+   other hooks. If commits touching watched code stop producing the nudge, this is
+   the first thing to check.
+3. **Optional but recommended: CI.** Add `essaymaster check` to your CI pipeline.
+   Then a broken invariant (an unsourced number, a missing citation key, a stale
+   PDF) fails the build like any other regression, even if every human and agent
+   forgets to look.
+
+Once armed, the loop needs no memory from anyone: work lands, a signal fires, and
+whoever sees it (you or Claude) runs the sync below. Between signals, the paper
+needs zero attention.
+
 When either fires, run:
 
 ```
