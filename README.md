@@ -2,6 +2,9 @@
 
 Write and maintain repo-resident research papers that grow with your codebase.
 
+**Docs:** [Getting started](docs/getting-started.md) ·
+[Concepts](docs/concepts.md) · [Commands & CLI](docs/commands.md)
+
 Extracted from the practice that produced the Gerbil WebGPU paper: a ~17-page
 arXiv-grade systems paper living in `paper/` of the engine repo, kept current across
 five months and 41 maintenance commits as optimization campaigns landed — every number
