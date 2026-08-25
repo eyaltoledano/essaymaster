@@ -1,0 +1,98 @@
+% essaymaster paper skeleton — arXiv-style preprint (self-contained arxiv.sty).
+% Fill every <PLACEHOLDER>; delete guidance comments as sections are written.
+% Two-column densification (optional): uncomment the fontsize/geometry block.
+\documentclass{article}          % add [twocolumn] for the dense variant
+\usepackage{arxiv}
+% \usepackage[fontsize=9.4pt]{fontsize}
+% \geometry{a4paper, left=0.65in, right=0.65in, top=0.8in, bottom=0.8in}
+% \setlength{\columnsep}{0.24in}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{microtype}
+
+% Figures ship as PDF (preferred) with PNG fallback; build.sh converts the SVGs.
+\graphicspath{{figures/}}
+\hypersetup{colorlinks=true, linkcolor=blue!55!black, citecolor=blue!45!black, urlcolor=blue!55!black}
+\bibliographystyle{plainnat}
+
+\title{<TITLE: system name + what it is — no adjective pile-ups>}
+\author{<AUTHOR>\\ \texttt{<email>}}
+\date{\today}
+\preprintlabel{<Short running label>: Preprint}
+
+% Every unsourced number in the text uses \todo{} — loud, red, greppable.
+% The pre-submission gate is: zero \todo{} left, or each remaining one is
+% explicitly framed as future work in Limitations.
+\newcommand{\todo}[1]{\textcolor{red}{[\textbf{TODO:} #1]}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% Written LAST. Structure: problem + why it matters (1-2 sentences); what we built
+% (1-2); headline measured results with qualifiers IN the sentence; the takeaway.
+% Unrun measurements that matter get declared here, not hidden.
+<ABSTRACT>
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+% The case for the work; why prior approaches don't fit; then the explicit list:
+%
+% This paper makes the following contributions:
+% \begin{itemize}
+%   \item \textbf{<Contribution 1>} — one sentence, ending with its headline evidence.
+%   ...
+% \end{itemize}
+% Close with a results preview.
+
+\section{Background and Motivation}
+\label{sec:background}
+% Anchor on a MOTIVATING MEASUREMENT (a table or figure), not opinion.
+
+\section{<Design / Architecture>}
+\label{sec:design}
+
+\section{<The characterization section — the paper's distinctive frame>}
+\label{sec:anatomy}
+% Write as cohesive original prose. This is usually the most-cited section.
+
+% One section per remaining contribution: mechanism -> why the obvious
+% alternative fails -> measured result.
+
+\section{Evaluation}
+\label{sec:eval}
+% Open with explicit questions: "We answer: Q1 ... Qn".
+\subsection{Methodology}
+% Testbed table (exact hardware, OS, runtime versions, commit hash, run count,
+% warm-up protocol). Named baselines WITH versions. How each metric is computed.
+\subsection{Results}
+% Medians/error bars over N runs. Every number traces to results/measurements.csv.
+\subsection{Ablations}
+
+\section{Related Work}
+\label{sec:related}
+% Transcribed from the plan doc's verified survey; positioned, not listed.
+
+\section{Limitations and Future Work}
+\label{sec:limitations}
+% Device variance, thermal, version drift, n, what was NOT measured, author bias.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\bibliography{refs}
+
+\appendix
+\section{Artifact Appendix}
+% Repo URL, commit, exact commands to reproduce every table/figure, expected numbers.
+
+\end{document}

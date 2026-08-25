@@ -1,0 +1,13 @@
+# LaTeX aux
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+# generated figure conversions (SVGs are the versioned source)
+figures/*.pdf
+figures/*.png
+arxiv-bundle/

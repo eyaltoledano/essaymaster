@@ -1,0 +1,16 @@
+{
+  "_comment": "THE single curated number source for the paper. Every block carries a provenance string (file/log/doc + date). Values not yet measured are the literal string 'TODO' and surface as \\todo{} in the tex. Numbers measured under abnormal conditions get 'needs-recheck' in provenance and are never headline results.",
+  "testbed": [
+    {
+      "id": "example-device",
+      "hardware": "TODO",
+      "os": "TODO",
+      "runtime": "TODO (name + version)",
+      "provenance": "TODO — how/when these facts were read from the machine"
+    }
+  ],
+  "headline": {
+    "example_metric": "TODO",
+    "provenance": "TODO"
+  }
+}

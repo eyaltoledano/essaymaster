@@ -1,0 +1,10 @@
+{
+  "lastSyncedCommit": "FILL-AT-INIT",
+  "watchedPaths": [],
+  "watchedSignals": [
+    "commits with measured numbers in the message",
+    "new design docs",
+    "changes to benchmark corpora"
+  ],
+  "pendingTodos": []
+}

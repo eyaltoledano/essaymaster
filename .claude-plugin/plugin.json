@@ -1,0 +1,9 @@
+{
+  "name": "essaymaster",
+  "version": "0.1.0",
+  "description": "Mine, write, and maintain repo-resident research papers (arXiv-grade) from ongoing engineering work. Provenance-tagged numbers, verified citations, one-command builds, and automatic drift-sync as the codebase evolves.",
+  "author": {
+    "name": "Eyal Toledano"
+  },
+  "keywords": ["paper", "arxiv", "latex", "research", "writing", "documentation"]
+}
