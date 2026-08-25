@@ -1,10 +1,7 @@
 {
   "lastSyncedCommit": "d4186ced993b6baf2bb2fab02ee1235aedd78a7e",
   "watchedPaths": [
-    "bin/",
     "skills/",
-    "templates/",
-    "scripts/",
     "commands/",
     "agents/",
     "hooks/",

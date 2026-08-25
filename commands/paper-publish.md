@@ -8,7 +8,7 @@ remaining TODOs are framed as future work, reviewer-readiness checklist reconcil
 (2) disclosure — confirm with the owner that every claim and number in the paper is
 cleared for public release (nothing internal-only or needs-clearance; see the
 Disclosure rule in SKILL.md). Then `node
-"${CLAUDE_PLUGIN_ROOT}/bin/essaymaster.mjs" bundle` (builds with a .bbl, assembles,
+"${CLAUDE_PLUGIN_ROOT}/skills/essaymaster/bin/essaymaster.mjs" bundle` (builds with a .bbl, assembles,
 verifies), and remind the user to review arXiv's rebuilt PDF before finalizing.
 
 $ARGUMENTS

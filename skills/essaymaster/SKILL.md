@@ -69,11 +69,14 @@ output review-grade instead of blog-grade.
 
 ## The CLI (always present — no fallback path)
 
-Every mechanical step goes through the bundled CLI, which ships in this package at
-`bin/essaymaster.mjs` (from a plugin install: `node
-"${CLAUDE_PLUGIN_ROOT}/bin/essaymaster.mjs" <verb>`). It is versioned with the skill
-and therefore always present wherever the skill runs — never probe for it, never
-hand-roll its verbs, never write a "if the CLI is missing" branch:
+Every mechanical step goes through the bundled CLI, which lives **inside this
+skill's own directory** — `<dir containing this SKILL.md>/bin/essaymaster.mjs` — so
+any install method that delivers the skill delivers the CLI with it (skills-CLI
+install: `~/.claude/skills/essaymaster/bin/essaymaster.mjs`; plugin install:
+`${CLAUDE_PLUGIN_ROOT}/skills/essaymaster/bin/essaymaster.mjs`). Run verbs as
+`node <that path> <verb>` from inside the target repo. It is versioned with the
+skill and therefore always present wherever the skill runs — never probe for it,
+never hand-roll its verbs, never write a "if the CLI is missing" branch:
 
 | Verb | Does |
 |---|---|

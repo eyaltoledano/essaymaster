@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}/scripts/paper-drift.sh\""
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/skills/essaymaster/scripts/paper-drift.sh\""
           }
         ]
       }

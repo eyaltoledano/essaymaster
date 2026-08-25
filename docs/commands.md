@@ -14,10 +14,11 @@
 
 ## CLI verbs (what the agent and CI run)
 
-The CLI ships inside the package (`bin/essaymaster.mjs`, zero dependencies), so it
-is present wherever the skill is. You rarely type these yourself, with two
-exceptions worth knowing: `check` (wire it into CI) and `drift` (a quick status
-look).
+The CLI lives inside the skill folder itself (`skills/essaymaster/bin/essaymaster.mjs`;
+after a standard install that is `~/.claude/skills/essaymaster/bin/essaymaster.mjs`),
+zero dependencies, so any install that delivers the skill delivers the CLI. You
+rarely type these yourself, with two exceptions worth knowing: `check` (wire it
+into CI) and `drift` (a quick status look).
 
 | Verb | What it does |
 |---|---|

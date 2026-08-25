@@ -70,10 +70,11 @@ arms them:
 2. **The commit-time signal** is a git hook. `/paper-init` installs it for you in
    the repo where the paper was created. The one thing to know: **git hooks do not
    travel with clones.** Each teammate (and each fresh clone or new machine) arms it
-   once with:
+   once, either by asking Claude ("install the essaymaster capture hook") or
+   directly:
 
    ```bash
-   node <package>/bin/essaymaster.mjs hooks install
+   node ~/.claude/skills/essaymaster/bin/essaymaster.mjs hooks install
    ```
 
    Run it from anywhere inside the repo; it is safe to re-run and never disturbs

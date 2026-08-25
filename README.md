@@ -66,9 +66,10 @@ Commands: `/paper-mine` `/paper-mine-sessions` `/paper-init` `/paper-sync`
 
 ## The CLI
 
-The mechanical spine ships as a zero-dependency CLI inside the package
-(`bin/essaymaster.mjs`), so it is always present wherever the skill runs — the skill
-routes every mechanical step through it, with no "if missing" fallback:
+The mechanical spine ships as a zero-dependency CLI inside the skill folder itself
+(`skills/essaymaster/bin/essaymaster.mjs`), so any install method that delivers the
+skill delivers the CLI with it — the skill routes every mechanical step through it,
+with no "if missing" fallback:
 
 ```
 essaymaster drift        # how far each paper lags HEAD (--json for agents)
@@ -105,15 +106,16 @@ step, gated in `/paper-publish` and `essaymaster bundle`.
 ## Layout
 
 ```
-bin/essaymaster.mjs      the CLI (zero-dependency; state transitions + verification)
-skills/essaymaster/      SKILL.md + references/ (mining, session-mining, planning,
-                         provenance, citations, writing, maintenance, toolchain, figures)
+skills/essaymaster/      the whole skill, self-contained:
+  SKILL.md + references/   (mining, session-mining, planning, provenance,
+                            citations, writing, maintenance, toolchain, figures)
+  bin/essaymaster.mjs      the CLI (zero-dependency; state transitions + verification)
+  scripts/                 check-toolchain.sh, paper-drift.sh, paper-post-commit.sh +
+                           install-git-hook.sh (the commit-time capture hook)
+  templates/paper/         the scaffold: build.sh, Makefile, arxiv.sty, paper.tex
+                           skeleton, refs.bib, data/results/figures pipeline, SYNC.json
 commands/                /paper-* slash commands
 agents/                  paper-miner (repo scout), session-miner (transcript scout),
                          paper-reviewer (adversarial)
 hooks/hooks.json         SessionStart drift report (silent when no paper / no drift)
-scripts/                 check-toolchain.sh, paper-drift.sh, paper-post-commit.sh +
-                         install-git-hook.sh (the commit-time capture hook)
-templates/paper/         the scaffold: build.sh, Makefile, arxiv.sty, paper.tex
-                         skeleton, refs.bib, data/results/figures pipeline, SYNC.json
 ```
