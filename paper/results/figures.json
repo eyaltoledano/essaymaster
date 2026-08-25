@@ -1,0 +1,110 @@
+{
+  "fig1_commit_cadence": {
+    "title": "Paper-maintenance commits over the case-study window",
+    "provenance": "per-date counts aggregated from the 41-commit HEAD-only corpus list (same git log command as 'corpus')",
+    "points": [
+      {
+        "date": "2026-03-11",
+        "cumulative": 4
+      },
+      {
+        "date": "2026-03-12",
+        "cumulative": 5
+      },
+      {
+        "date": "2026-06-13",
+        "cumulative": 9
+      },
+      {
+        "date": "2026-06-14",
+        "cumulative": 11
+      },
+      {
+        "date": "2026-06-15",
+        "cumulative": 13
+      },
+      {
+        "date": "2026-06-23",
+        "cumulative": 16
+      },
+      {
+        "date": "2026-06-25",
+        "cumulative": 25
+      },
+      {
+        "date": "2026-07-02",
+        "cumulative": 29
+      },
+      {
+        "date": "2026-07-23",
+        "cumulative": 34
+      },
+      {
+        "date": "2026-07-24",
+        "cumulative": 36
+      },
+      {
+        "date": "2026-07-25",
+        "cumulative": 37
+      },
+      {
+        "date": "2026-08-10",
+        "cumulative": 41
+      }
+    ]
+  },
+  "fig2_todo_burndown": {
+    "title": "Unsourced (TODO-flagged) numbers in the provenance ledger over time",
+    "provenance": "git log --follow -- paper/results/measurements.csv (8 versions); per sha: git show <sha>:paper/results/measurements.csv parsed with python3 csv.reader (285 rows contain quoted commas, so naive comma counting miscounts); todo = rows whose is_todo field is the string 'TODO'. NOTE semantics (review finding #E3): total_rows INCLUDES the todo_rows; sourced rows = total_rows - todo_rows (242 -> 490). Cross-checked against the build's own 'N curated rows (M TODO)' output at HEAD.",
+    "points": [
+      {
+        "date": "2026-06-23",
+        "sha": "f6ef90a",
+        "total_rows": 258,
+        "todo_rows": 16
+      },
+      {
+        "date": "2026-06-25",
+        "sha": "d574f8d",
+        "total_rows": 287,
+        "todo_rows": 18
+      },
+      {
+        "date": "2026-06-25",
+        "sha": "e98ad75",
+        "total_rows": 331,
+        "todo_rows": 12
+      },
+      {
+        "date": "2026-07-02",
+        "sha": "673ad93",
+        "total_rows": 348,
+        "todo_rows": 12
+      },
+      {
+        "date": "2026-07-02",
+        "sha": "6a72bb1",
+        "total_rows": 359,
+        "todo_rows": 12
+      },
+      {
+        "date": "2026-07-02",
+        "sha": "946855c",
+        "total_rows": 405,
+        "todo_rows": 12
+      },
+      {
+        "date": "2026-07-23",
+        "sha": "e4a250d",
+        "total_rows": 447,
+        "todo_rows": 8
+      },
+      {
+        "date": "2026-08-10",
+        "sha": "be48302",
+        "total_rows": 498,
+        "todo_rows": 8
+      }
+    ]
+  }
+}

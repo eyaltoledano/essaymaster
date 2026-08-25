@@ -1,0 +1,116 @@
+{
+  "_comment": "Canonical measured numbers for the essaymaster paper. Case-study corpus = the Gerbil repo (/Users/shenron/Code/gerbil, HEAD=docs/paper-two-column), mined 2026-08-25 by a read-only agent; every block records the exact command. 'TODO' values are unsourced and surface as \\todo{} in the tex.",
+  "case_study": {
+    "repo": "gerbil (github.com/tryhamster/gerbil)",
+    "mined_on": "2026-08-25",
+    "head_branch": "docs/paper-two-column",
+    "provenance": "read-only git mining session 2026-08-25; commands recorded per block below"
+  },
+  "corpus": {
+    "paper_maintenance_commits": 41,
+    "first_commit_date": "2026-03-11",
+    "last_commit_date": "2026-08-10",
+    "commits_all_branches": 47,
+    "earliest_eng_reference_feat_commits": 4,
+    "latex_paper_first_commit_date": "2026-06-23",
+    "provenance": "git log --format='%H|%ad|%s' --date=short -- paper/ docs/gpu-engine/paper.md docs/research-paper-plan.md docs/paper-ablation-plan.md (HEAD-only; --all gives 47). Caveat: the 4 earliest commits (2026-03-11/12) are engine feat: commits touching the engineering reference doc, not the LaTeX paper; the LaTeX paper begins 2026-06-23 (f6ef90a)."
+  },
+  "commit_timeline": {
+    "provenance": "per-date counts aggregated from the 41-commit HEAD-only corpus list (same git log command as 'corpus')",
+    "rows": [
+      { "date": "2026-03-11", "n": 4 },
+      { "date": "2026-03-12", "n": 1 },
+      { "date": "2026-06-13", "n": 4 },
+      { "date": "2026-06-14", "n": 2 },
+      { "date": "2026-06-15", "n": 2 },
+      { "date": "2026-06-23", "n": 3 },
+      { "date": "2026-06-25", "n": 9 },
+      { "date": "2026-07-02", "n": 4 },
+      { "date": "2026-07-23", "n": 5 },
+      { "date": "2026-07-24", "n": 2 },
+      { "date": "2026-07-25", "n": 1 },
+      { "date": "2026-08-10", "n": 4 }
+    ]
+  },
+  "decode_progression": {
+    "first_published_tok_s": 145,
+    "final_kept_peak_tok_s": 347.3,
+    "ratio": "2.4x",
+    "window": "the LaTeX paper's lifetime, 2026-06-23 (f6ef90a) to 2026-08-10 (be48302), ~7 weeks",
+    "provenance": "gerbil git show f6ef90a: paper.tex abstract headline '145 tok/s Dawn M4 Max'; be48302 subject 'refresh decode-throughput progression to 347.3 tok/s kept peak'. The March engineering-reference doc carried only a projected 100-180 tok/s, so the progression is scoped to the LaTeX paper's lifetime, not the full case-study window. Verified by review pass 2026-08-25 (finding #E1)."
+  },
+  "ledger_growth": {
+    "rows_added": 240,
+    "window_weeks": 7,
+    "approx_rows_per_month": 150,
+    "provenance": "derived from todo_history rows below: 258 -> 498 total rows between 2026-06-23 and 2026-08-10 (~6.9 weeks); ~150 rows/month over the ledger's lifetime. Corrected from an unledgered ~50/month figure by review finding #E2."
+  },
+  "todo_history": {
+    "provenance": "git log --follow -- paper/results/measurements.csv (8 versions); per sha: git show <sha>:paper/results/measurements.csv parsed with python3 csv.reader (285 rows contain quoted commas, so naive comma counting miscounts); todo = rows whose is_todo field is the string 'TODO'. NOTE semantics (review finding #E3): total_rows INCLUDES the todo_rows; sourced rows = total_rows - todo_rows (242 -> 490). Cross-checked against the build's own 'N curated rows (M TODO)' output at HEAD.",
+    "rows": [
+      { "date": "2026-06-23", "sha": "f6ef90a", "total_rows": 258, "todo_rows": 16 },
+      { "date": "2026-06-25", "sha": "d574f8d", "total_rows": 287, "todo_rows": 18 },
+      { "date": "2026-06-25", "sha": "e98ad75", "total_rows": 331, "todo_rows": 12 },
+      { "date": "2026-07-02", "sha": "673ad93", "total_rows": 348, "todo_rows": 12 },
+      { "date": "2026-07-02", "sha": "6a72bb1", "total_rows": 359, "todo_rows": 12 },
+      { "date": "2026-07-02", "sha": "946855c", "total_rows": 405, "todo_rows": 12 },
+      { "date": "2026-07-23", "sha": "e4a250d", "total_rows": 447, "todo_rows": 8 },
+      { "date": "2026-08-10", "sha": "be48302", "total_rows": 498, "todo_rows": 8 }
+    ]
+  },
+  "review_evidence": {
+    "review_commits": 4,
+    "numbered_finding_ids": "#A1, #D1, #D2, #E1-#E7",
+    "finding_lenses_never_used": "#C (citations), #H (honesty) — no such ids appear anywhere in the log",
+    "example_subjects": [
+      "paper: qualify causal claim in abstract+contributions (review #E1/E3/E4)",
+      "paper: reframe head-to-head as same-base-model native-format ... (review #E1-E7,#D1,#D2)",
+      "paper: TTS status ... + Limitations honesty pass (review #A1,#D2)"
+    ],
+    "provenance": "corpus git log subjects+bodies piped to grep -Ei '#(E|D|A|C|H)[0-9]|review'; bodies added nothing beyond subjects"
+  },
+  "snapshot_head": {
+    "measurements_csv_rows": 498,
+    "measurements_csv_todo_rows": 8,
+    "refs_bib_entries": 51,
+    "paper_tex_lines": 1365,
+    "todo_macros_in_tex": 4,
+    "figure_svgs": 9,
+    "pdf_pages": 17,
+    "provenance": "at gerbil HEAD 2026-08-25: python3 csv.reader over paper/results/measurements.csv (498 data rows, 8 with is_todo=='TODO'); grep -c '^@' paper/refs.bib; wc -l paper/paper.tex; grep -o 'todo{' paper/paper.tex | wc -l; ls paper/figures/*.svg | wc -l; mdls -name kMDItemNumberOfPages paper/paper.pdf"
+  },
+  "build": {
+    "wall_seconds": 4.699,
+    "runs": 1,
+    "engine": "tectonic (warm package cache)",
+    "consolidation_rows": 498,
+    "figure_series": 9,
+    "corpora_cleaning_example": "gemma corpus: 504 rows kept, 29 adversarial/failed dropped (logged by the build)",
+    "provenance": "time (cd gerbil/paper && ./build.sh) run once 2026-08-25; succeeded, 401.6 KiB PDF; n=1, warm cache — indicative, not a benchmark"
+  },
+  "sync_lag": {
+    "provenance": "for consecutive paper-commit pairs (last 15): git rev-list --count prev..curr and same with ':(exclude)paper' ':(exclude)docs/gpu-engine/paper.md' ':(exclude)docs/research-paper-plan.md' ':(exclude)docs/paper-ablation-plan.md'. UPPER BOUND: a commit touching both paper and code counts as non-paper.",
+    "max_nonpaper_commits_between_syncs": 117,
+    "max_gap_days": 16,
+    "rows": [
+      { "curr_date": "2026-08-10", "curr": "5e33e19", "prev": "05c3e08", "total": 120, "nonpaper": 117 },
+      { "curr_date": "2026-07-25", "curr": "05c3e08", "prev": "072f235", "total": 14, "nonpaper": 14 },
+      { "curr_date": "2026-07-24", "curr": "f915821", "prev": "8a615fb", "total": 30, "nonpaper": 29 },
+      { "curr_date": "2026-07-23", "curr": "14c8563", "prev": "946855c", "total": 38, "nonpaper": 33 },
+      { "curr_date": "2026-07-02", "curr": "946855c", "prev": "6a72bb1", "total": 15, "nonpaper": 11 }
+    ]
+  },
+  "plan_docs": {
+    "research_paper_plan_lines": 408,
+    "ablation_plan_lines": 191,
+    "plan_table_rows": 80,
+    "plan_arxiv_cited_rows": 41,
+    "plan_repo_only_rows": 12,
+    "provenance": "wc -l on gerbil docs/research-paper-plan.md and docs/paper-ablation-plan.md; grep '^| ' with 'arXiv:' / -i 'repo only' over plan table rows"
+  },
+  "this_paper": {
+    "pipeline_run": "first end-to-end essaymaster run (mine -> plan -> scaffold -> data -> figures -> draft -> build), executed by a Claude Code agent 2026-08-25",
+    "citations_verified_this_session": 7,
+    "provenance": "this session; the 7 = Knuth 1984, Olah 2017, Kluyver 2016, Lethbridge 2003, SWE-agent, SWE-bench, AI Scientist (web-verified 2026-08-25); remaining refs.bib entries are repo/site-only by design"
+  }
+}

@@ -1,0 +1,53 @@
+% arxiv.sty — minimal single-column preprint style (NeurIPS-2018-derived),
+% MIT-licensed, after kourgeorge/arxiv-style. Self-contained: depends only on base
+% TeX Live packages so arXiv / a stock TeX Live build compiles it with no tlmgr pulls.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{arxiv}[2024/01/01 v1.0 arxiv-style preprint]
+
+\RequirePackage{geometry}
+\geometry{a4paper, left=1.1in, right=1.1in, top=1.1in, bottom=1.1in}
+
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{lmodern}
+
+% running header carrying the preprint label
+\newcommand{\@preprintlabel}{A Preprint}
+\newcommand{\preprintlabel}[1]{\renewcommand{\@preprintlabel}{#1}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\itshape\@preprintlabel}
+\fancyhead[R]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% title block: tighter than article default
+\renewcommand{\maketitle}{%
+  \begingroup
+  \setlength{\parindent}{0pt}%
+  \vspace*{0.4in}%
+  {\Large\bfseries\@title\par}%
+  \vspace{0.18in}%
+  {\large\@author\par}%
+  \vspace{0.12in}%
+  {\@date\par}%
+  \vspace{0.18in}%
+  \hrule
+  \vspace{0.18in}%
+  \endgroup
+}
+
+% abstract: indented block with a centered heading
+\renewenvironment{abstract}{%
+  \centerline{\large\bfseries Abstract}\vspace{0.3em}%
+  \begin{quote}\small
+}{%
+  \end{quote}\vspace{0.4em}\hrule\vspace{0.5em}
+}
+
+\titlespacing*{\section}{0pt}{1.3ex plus 1ex minus .2ex}{0.9ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{1.1ex plus 1ex minus .2ex}{0.6ex plus .2ex}
+
+\setlist{leftmargin=1.4em, itemsep=0.15em, topsep=0.25em}
+
+\endinput

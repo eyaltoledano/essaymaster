@@ -1,0 +1,21 @@
+{
+  "lastSyncedCommit": "c31afb4e03656acd5945bc3196948da86c0cd25c",
+  "watchedPaths": [
+    "skills/",
+    "templates/",
+    "scripts/",
+    "commands/",
+    "agents/",
+    "hooks/",
+    "README.md"
+  ],
+  "watchedSignals": [
+    "changes to the skill's modes or invariants (the paper describes them)",
+    "new reference files or subagents",
+    "template pipeline changes (build contract claims in §3.1)"
+  ],
+  "pendingTodos": [
+    "controlled comparison vs ad-hoc paper maintenance (claims-table row 6; NOT claimed in the paper)",
+    "second case study from the packaged tool's own accrued history"
+  ]
+}
