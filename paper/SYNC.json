@@ -1,6 +1,7 @@
 {
-  "lastSyncedCommit": "029dfb7a3e797ec2e656fc00dfb01f92ebb641b5",
+  "lastSyncedCommit": "dde3f8c0c5868602da8b05db287f300bac5b5222",
   "watchedPaths": [
+    "bin/",
     "skills/",
     "templates/",
     "scripts/",

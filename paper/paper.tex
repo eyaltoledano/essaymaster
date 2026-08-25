@@ -214,11 +214,17 @@ belief: for editorial work, the right agent interface is \emph{prose contracts p
 mechanical checks}, not end-to-end automation. The skill's procedure document routes
 among seven modes (mine, mine-sessions, init, sync, build, review, publish); nine
 reference files carry the rules of \S\ref{sec:design} in the imperative,
-checklist-bearing form agents follow reliably. The mechanical parts are plain scripts: drift counting,
-toolchain probing, consolidation, figure generation, the build. An agent should never
-be trusted to \emph{compute} what a script can compute. The judgment parts remain
-agent work bounded by the invariants: classifying a landed commit, deciding whether a
-feature is a contribution, wording a qualifier.
+checklist-bearing form agents follow reliably. The mechanical parts live in a single zero-dependency CLI
+bundled with the skill (drift counting, scaffolding, migration, sync-pointer
+transitions, bundle assembly, and a \texttt{check} verb that lints the invariants:
+provenance coverage, citation keys, figure files, TODO surfacing, staleness), so
+the skill routes them through one always-present tool with no fallback branch, and
+\texttt{check} doubles as a continuous-integration gate: the paper gets tests. An
+agent should never be trusted to \emph{compute} what a script can compute. The
+judgment parts remain agent work bounded by the invariants: classifying a landed
+commit, deciding whether a feature is a contribution, wording a qualifier. The
+per-paper build stays vendored in the paper directory, deliberately: a paper must
+build from a bare checkout with or without the CLI.
 
 The subagents divide by corpus. The \emph{miner} performs read-only archaeology over
 the repository: given a slice, it extracts candidate paper material (optimization
@@ -242,7 +248,11 @@ plan document containing the verified related-work survey, the genre choice, and
 \emph{claims-to-required-evidence table} whose rows are the only claims the paper is
 permitted to make. The paper is then written evidence-first, evaluation skeleton
 before introduction, so that an unwritable evaluation section is discovered on day
-one rather than at submission.
+one rather than at submission. Finally, the discipline separates \emph{writing} from
+\emph{publishing}: mined candidates carry a disclosure rating (public,
+needs-clearance, internal-only), internal-only material never enters a publishable
+paper without the owner's explicit decision, and an internal whitepaper in a private
+repository is a first-class target; publication is a distinct, gated step.
 
 \section{Case Study: Five Months of the Gerbil Paper}
 \label{sec:casestudy}
