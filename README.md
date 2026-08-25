@@ -39,17 +39,17 @@ rebuild it with `cd paper && ./build.sh`.
 - **Review / Publish** — adversarial review with numbered findings (overclaim hunt,
   number reconciliation, citation audit), then a verified arXiv bundle.
 
-## Install (Claude Code plugin)
+## Install
 
-From a marketplace that includes this repo, or locally:
+One line:
 
 ```bash
-# marketplace entry pointing at this directory, then:
-/plugin install essaymaster
+npx skills add eyaltoledano/essaymaster
 ```
 
-Or use it without installing: mention "essaymaster" / point Claude at
-`skills/essaymaster/SKILL.md` in this checkout.
+Also works as a Claude Code plugin (from a marketplace that includes this repo:
+`/plugin install essaymaster`), or with no install at all: mention "essaymaster" /
+point Claude at `skills/essaymaster/SKILL.md` in this checkout.
 
 Commands: `/paper-mine` `/paper-init` `/paper-sync` `/paper-build` `/paper-review`
 `/paper-publish`.
