@@ -77,8 +77,14 @@ arms them:
    node ~/.claude/skills/essaymaster/bin/essaymaster.mjs hooks install
    ```
 
-   Run it from anywhere inside the repo; it is safe to re-run and never disturbs
-   other hooks. If commits touching watched code stop producing the nudge, this is
+   That path is for a global install. If the skill was installed into the project
+   instead, it lives in the repo itself, so from the repo root:
+
+   ```bash
+   node .claude/skills/essaymaster/bin/essaymaster.mjs hooks install
+   ```
+
+   Either way it is safe to re-run and never disturbs other hooks. If commits touching watched code stop producing the nudge, this is
    the first thing to check.
 3. **Optional but recommended: CI.** Add `essaymaster check` to your CI pipeline.
    Then a broken invariant (an unsourced number, a missing citation key, a stale

@@ -14,9 +14,11 @@
 
 ## CLI verbs (what the agent and CI run)
 
-The CLI lives inside the skill folder itself (`skills/essaymaster/bin/essaymaster.mjs`;
-after a standard install that is `~/.claude/skills/essaymaster/bin/essaymaster.mjs`),
-zero dependencies, so any install that delivers the skill delivers the CLI. You
+The CLI lives inside the skill folder itself (`skills/essaymaster/bin/essaymaster.mjs`),
+zero dependencies, so any install that delivers the skill delivers the CLI. After a
+global install that is `~/.claude/skills/essaymaster/bin/essaymaster.mjs`; after a
+project-local install it is `.claude/skills/essaymaster/bin/essaymaster.mjs` inside
+the repo. You
 rarely type these yourself, with two exceptions worth knowing: `check` (wire it
 into CI) and `drift` (a quick status look).
 

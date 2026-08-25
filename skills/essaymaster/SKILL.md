@@ -71,9 +71,11 @@ output review-grade instead of blog-grade.
 
 Every mechanical step goes through the bundled CLI, which lives **inside this
 skill's own directory** — `<dir containing this SKILL.md>/bin/essaymaster.mjs` — so
-any install method that delivers the skill delivers the CLI with it (skills-CLI
-install: `~/.claude/skills/essaymaster/bin/essaymaster.mjs`; plugin install:
-`${CLAUDE_PLUGIN_ROOT}/skills/essaymaster/bin/essaymaster.mjs`). Run verbs as
+any install method that delivers the skill delivers the CLI with it (global
+skills-CLI install: `~/.claude/skills/essaymaster/bin/essaymaster.mjs`;
+project-local install: `<repo>/.claude/skills/essaymaster/bin/essaymaster.mjs`;
+plugin install: `${CLAUDE_PLUGIN_ROOT}/skills/essaymaster/bin/essaymaster.mjs` —
+resolve from wherever this SKILL.md was loaded). Run verbs as
 `node <that path> <verb>` from inside the target repo. It is versioned with the
 skill and therefore always present wherever the skill runs — never probe for it,
 never hand-roll its verbs, never write a "if the CLI is missing" branch:
